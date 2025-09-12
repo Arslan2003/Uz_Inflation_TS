@@ -1,3 +1,6 @@
+# install.packages(c("zoo", "fpp", "forecast", "tseries", "lmtest", "nortest"))
+
+
 library(zoo)
 library(fpp)
 library(nortest)
@@ -101,6 +104,7 @@ forecast(sarima_model, h=1)
 # residual mean E[e] = 0, 
 # finite & constant variance = sigma^2, 
 # autocovariance E[e, e] = 0
+
 
 
 
