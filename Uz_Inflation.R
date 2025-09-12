@@ -1,12 +1,14 @@
+# install.packages(c("zoo", "fpp", "forecast", "tseries", "lmtest", "nortest"))
+
+
 library(zoo)
 library(fpp)
+library(nortest)
+library(lmtest)
 
 
-# getwd()
-# setwd('C:/Users/Public/Desktop/Term 1/Statistical Techniques & Time Series/CW')
 
-
-# Task 1: Obtain the ts (Done)
+# Task 1: Obtain the ts
 df = read.csv('Uzb_monthly_inflation.csv')
 head(df)
 df$Date = as.yearmon(df$Date, format = "%Y-%m")
@@ -17,7 +19,7 @@ plot(ts_data, main = "Monthly Inflation Change in Uzb", ylab = "Inflation Change
 
 
 
-# Task 2: Detrend the series (Done)
+# Task 2: Detrend the series
 # Use a linear model to find the trend, then subtract it from the ts
 trend <- lm(ts_data ~ time(ts_data))
 detrended_series <- ts_data - fitted(trend)
@@ -25,13 +27,13 @@ plot(detrended_series, main = "Detrended Series", ylab = "Residuals", xlab = "Ti
 
 
 
-# Task 3: Create and plot ACF & PACF (Done)
+# Task 3: Create and plot ACF & PACF
 acf(detrended_series, main = 'ACF of the Time Series') # Result: Quickly degrading values => probably stationary
 pacf(detrended_series, main = 'PACF of the Time Series')
 
 
 
-# Task 4: Check whether serially auto-correlated. Compare to task (iii) (Done)
+# Task 4: Check whether serially auto-correlated. Compare to task (iii)
 Box.test(detrended_series, type = 'Ljung-Box')
 # Result: p-value = 7.772e-14 => significant autocorrelation
 
@@ -48,9 +50,8 @@ kpss.test(detrended_series)
 
 
 
-# Task 6: Normality test (Done)
+# Task 6: Normality test
 # Test 1: Lilliefors (Kolmogoros-Smirnov)
-library(nortest)
 lillie.test(coredata(detrended_series))
 # Result: p-value = 2.975e-05 => reject H0 => Not a normal distribution
 
@@ -65,7 +66,7 @@ sf.test(detrended_series)
 
 
 # Task 7: Fit an ARMA model & determine the best lag order
-# Accounting for seasonality (Appropriate arma model (SARIMA))
+# Accounting for seasonality (Appropriate ARMA model (SARIMA))
 acf(detrended_series, lag.max = 12, type = 'correlation')
 pacf(detrended_series, lag.max = 12)
 automatic = auto.arima(detrended_series)
@@ -78,7 +79,6 @@ summary(sarima_model)
 # The residuals should behave like white noise. Let's check that:
 checkresiduals(sarima_model)
 shapiro.test(residuals(sarima_model)) # p = 1.277e-15 => reject H0 => not normal distribution
-library(lmtest)
 bptest(residuals(sarima_model) ~ fitted(sarima_model)) # p = 0.3843 = > cannot reject H0 => heteroscedasticity
 Box.test(residuals(sarima_model), lag = 12, type = "Ljung-Box") # p = 0.7837 => cannot reject H0 => no signif. autocorrelation
 mean(residuals(sarima_model)) # = -0.006575348, i.e., close enough to 0
@@ -104,6 +104,8 @@ forecast(sarima_model, h=1)
 # residual mean E[e] = 0, 
 # finite & constant variance = sigma^2, 
 # autocovariance E[e, e] = 0
+
+
 
 
 
