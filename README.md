@@ -99,7 +99,7 @@ This project can be used to practice using the tools or applying the methods lis
 <br>
 
 
-## 📝 License
+## ⚖️ License
 
 This project is licensed under the MIT License.  
 See the [LICENSE](LICENSE) file for full terms.
