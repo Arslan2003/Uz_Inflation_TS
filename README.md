@@ -1,6 +1,6 @@
 # UZ_Inflation - Time Series Analysis of Uzbekistan's Inflation
 
-This project applies statistical techniques and time series modelling to analyse monthly inflation levels in Uzbekistan over the past 15 years, and to forecast future levels of inflation. The data was obtained from the official website of the Government of Uzbekistan. The study explores the statistical properties of the series, tests for stationarity and normality, and fits a SARIMA model for forecasting future inflation levels.
+This project applies statistical techniques and time series modelling to analyse monthly inflation levels in Uzbekistan over the past 15 years and to forecast future inflation levels. The data was obtained from the official website of the Government of Uzbekistan. The study explores the statistical properties of the series, tests for stationarity and normality, and fits a SARIMA model for forecasting future inflation levels.
 
 <br>
 
@@ -112,6 +112,11 @@ See the [LICENSE](LICENSE) file for full terms.
 - Dataset: [National Statistics Committee of the Republic of Uzbekistan](https://stat.uz/en/).
 - Adhikari, R., & Agrawal, R. K. (2013). *Forecasting strong seasonal time series with ARIMA*. Computational Statistics & Data Analysis, 61, 157–168.
 - Frain, J. (1992). *Time Series Analysis in Econometrics*. Springer.
+
+<br>
+
+## 🔗 Learn More
+Do you want to find out more details about this project? Read the [report](Uz_Inflation_Report.pdf).
 
 <br>
 
